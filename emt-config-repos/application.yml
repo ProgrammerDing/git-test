@@ -1,0 +1,27 @@
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: emt-registry
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@${eureka.instance.hostname}:${server.port}/eureka/
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+
+security:
+  user:
+    name: emt
+    password: emt
